@@ -66,6 +66,7 @@ loadVars() {
 	detectCompose
 	setHostname
 	setupProxy
+    sync_secrets
 }
 
 case "$ACTION" in
