@@ -17,4 +17,5 @@ done
 
 idManagementSetup
 mtbaSetup
+lensSetup
 adt2fhirRestSetup
