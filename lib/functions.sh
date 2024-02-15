@@ -270,7 +270,7 @@ function sync_secrets() {
     if [[ $OIDC_PRIVATE_REDIRECT_URLS != "" ]]; then
         if [[ $secret_sync_args == "" ]]; then
             secret_sync_args="OIDC:OIDC_PUBLIC:public;$OIDC_PUBLIC_REDIRECT_URLS"
-        else 
+        else
             secret_sync_args+="${delimiter}OIDC:OIDC_PUBLIC:public;$OIDC_PUBLIC_REDIRECT_URLS"
         fi
     fi
