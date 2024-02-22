@@ -80,6 +80,7 @@ services:
   beam-connect:
     image: docker.verbis.dkfz.de/cache/samply/beam-connect:develop
     container_name: bridgehead-datashield-connect
+    entrypoint: ["tail", "-f", "/dev/null"]
     environment:
       PROXY_URL: "http://beam-proxy:8081"
       TLS_CA_CERTIFICATES_DIR: /run/secrets
