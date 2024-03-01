@@ -32,12 +32,14 @@ services:
       LOCAL_TARGETS_FILE: "./conf/connect_targets.json"
       HTTP_PROXY: http://forward_proxy:3128
       HTTPS_PROXY: http://forward_proxy:3128
-      NO_PROXY: dnpm-beam-proxy,dnpm-backend, host.docker.internal
+      NO_PROXY: dnpm-beam-proxy,dnpm-backend, host.docker.internal${DNPM_ADDITIONAL_NO_PROXY}
       RUST_LOG: ${RUST_LOG:-info}
       NO_AUTH: "true"
+      TLS_CA_CERTIFICATES_DIR: ./conf/trusted-ca-certs
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
+      - /etc/bridgehead/trusted-ca-certs:/conf/trusted-ca-certs:ro
       - /etc/bridgehead/dnpm/local_targets.json:/conf/connect_targets.json:ro
       - /etc/bridgehead/dnpm/central_targets.json:/conf/central_targets.json:ro
     labels:
@@ -47,6 +49,10 @@ services:
       - "traefik.http.routers.dnpm-connect.middlewares=dnpm-connect-strip"
       - "traefik.http.services.dnpm-connect.loadbalancer.server.port=8062"
       - "traefik.http.routers.dnpm-connect.tls=true"
+
+  dnpm-echo:
+    image: docker.verbis.dkfz.de/cache/samply/bridgehead-echo:latest
+    container_name: bridgehead-dnpm-echo
 
 secrets:
   proxy.pem:
