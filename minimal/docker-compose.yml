@@ -3,7 +3,7 @@ version: "3.7"
 services:
   traefik:
     container_name: bridgehead-traefik
-    image: docker.verbis.dkfz.de/cache/traefik:latest
+    image: docker.verbis.dkfz.de/cache/traefik:traefik.2.11.0
     command:
       - --entrypoints.web.address=:80
       - --entrypoints.websecure.address=:443
