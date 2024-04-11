@@ -11,7 +11,7 @@ services:
       DB_BLOCK_CACHE_SIZE: $BLAZE_MEMORY_CAP
       ENFORCE_REFERENTIAL_INTEGRITY: "false"
     volumes:
-      - "blaze-data:/app/data"
+      - "blaze-data-nocxx:/app/data"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.blaze_ccp.rule=PathPrefix(`/ccp-localdatamanagement`)"
@@ -56,7 +56,7 @@ services:
 
 
 volumes:
-  blaze-data:
+  blaze-data-nocxx:
 
 secrets:
   proxy.pem:
