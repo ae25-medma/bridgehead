@@ -22,7 +22,7 @@ if [ "$ENABLE_DATASHIELD" == true ]; then
   echo '[{
     "external": "'$SITE_ID':443",
     "internal": "opal:8443",
-    "allowed": ["datashield-connect.request-manager.'$BROKER_ID'"]
+    "allowed": ["central-ds-orchestrator.'$BROKER_ID'"]
   }]' > /tmp/bridgehead/opal-map/local.json
   if [ "$USER" == "root" ]; then
     chown -R bridgehead:docker /tmp/bridgehead
