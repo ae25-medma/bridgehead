@@ -65,3 +65,16 @@ services:
       - "traefik.http.routers.reporter_ccp.tls=true"
       - "traefik.http.middlewares.reporter_ccp_strip.stripprefix.prefixes=/ccp-reporter"
       - "traefik.http.routers.reporter_ccp.middlewares=reporter_ccp_strip"
+
+  file-dispatcher:
+    image: docker.verbis.dkfz.de/cache/samply/file-dispatcher:latest
+    environment:
+      - BEAM_ID=file-dispatcher.${PROXY_ID}
+      - PROJECT_MANAGER_ID=project-manager.request-manager.${BROKER_ID}
+      - BEAM_SECRET=${FILE_DISPATCHER_BEAM_SECRET} # Generated in exporter-setup.sh
+      - BEAM_URL=http://beam-proxy:8081
+      - EXPORTER_URL=http://exporter:8092
+  
+  beam-proxy:
+    environment:
+      - APP_file-dispatcher_KEY=${FILE_DISPATCHER_BEAM_SECRET}
