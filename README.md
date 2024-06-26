@@ -200,7 +200,7 @@ sudo systemctl [enable|disable] bridgehead@<PROJECT>.service
 After starting the Bridgehead, you can watch the initialization process with the following command:
 
 ```shell
-journalctl -u bridgehead@bbmri -f
+/srv/docker/bridgehead/bridgehead logs <project> -f
 ```
 
 if this exits with something similar to the following:
