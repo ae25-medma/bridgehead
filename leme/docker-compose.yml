@@ -42,6 +42,7 @@ services:
       PROXY_ID: ${PROXY_ID}
       APP_focus_KEY: ${FOCUS_BEAM_SECRET_SHORT}
       APP_sender_KEY: testbridgehead                  # GLEICH WIE IN file-sender
+      APP_receiver_KEY: testbridgehead                # GLEICH WIE IN file-receiver
       PRIVKEY_FILE: /run/secrets/proxy.pem
       ALL_PROXY: http://forward_proxy:3128
       TLS_CA_CERTIFICATES_DIR: /conf/trusted-ca-certs
@@ -79,7 +80,7 @@ services:
     environment:
       BEAM_URL: http://beam-proxy:8081
       BEAM_SECRET: testbridgehead                     # hinzufügen in beam-proxy
-      BEAM_ID: sender.${PROXY_ID}
+      BEAM_ID: receiver.${PROXY_ID}
     volumes:
       - /home/ubuntu/data:/data
 
