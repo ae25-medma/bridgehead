@@ -65,13 +65,13 @@ services:
       BIND_ADDR: 0.0.0.0:8080
       API_KEY: testbridgehead_api_key
       
-  #   labels:
-  #     - "traefik.enable=true"
-  #     - "traefik.http.routers.blaze_leme.rule=PathPrefix(`/send`)"              Füge Pfad ein schauen wie ID
-  #     - "traefik.http.middlewares.leme_b_strip.stripprefix.prefixes=/send"
-  #     - "traefik.http.services.blaze_leme.loadbalancer.server.port=8080"
-  #     - "traefik.http.routers.blaze_leme.middlewares=leme_b_strip,auth"
-  #     - "traefik.http.routers.blaze_leme.tls=true"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.file-sender.rule=PathPrefix(`/send`)"              #Füge Pfad ein schauen wie ID
+      # - "traefik.http.middlewares.leme_b_strip.stripprefix.prefixes=/send"
+      - "traefik.http.services.file-sender.loadbalancer.server.port=8080"
+      # - "traefik.http.routers.file-sender.middlewares=leme_b_strip"
+      - "traefik.http.routers.file-sender.tls=true"
 
 
   file-receiver:
