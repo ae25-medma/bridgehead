@@ -76,7 +76,7 @@ services:
 
   file-receiver:
     image: samply/beam-file:task-based-files-server
-    command: ["receive", "save", "-o", "/data", "-p", "%f_%n"]         # statt "send" auch "callback" zum weitersenden zu bsp. FASTAPI order Experss Server
+    command: ["receive", "save", "-o", "/data", "-p", "%f_%t_%n"]         # statt "send" auch "callback" zum weitersenden zu bsp. FASTAPI order Experss Server
     environment:
       BEAM_URL: http://beam-proxy:8081
       BEAM_SECRET: testbridgehead                     # hinzufügen in beam-proxy
