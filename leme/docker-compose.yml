@@ -70,8 +70,8 @@ services:
       - "traefik.http.routers.file-sender.rule=PathPrefix(`/send`)"              # Füge Pfad ein schauen wie ID
       # - "traefik.http.middlewares.leme_b_strip.stripprefix.prefixes=/send"
       - "traefik.http.services.file-sender.loadbalancer.server.port=8080"
-      # - "traefik.http.routers.file-sender.middlewares=leme_b_strip"
       - "traefik.http.routers.file-sender.tls=true"
+      - "traefik.http.routers.file-sender.middlewares=auth"
 
 
   file-receiver:
