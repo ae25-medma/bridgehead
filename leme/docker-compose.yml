@@ -87,9 +87,9 @@ services:
     volumes:
       - /home/ubuntu/data:/data
     env_file:
-    - /srv/docker/bridgehead/StandortPreprozessing/.env
+      - /srv/docker/bridgehead/StandortPreprozessing/.env
     environment:
-      - DIRECTORY_TO_WATCH: "/data"
+      - DIRECTORY_TO_WATCH: /data
       - POST_URL: ${POST_URL}
       - USERNAME: ${USERNAME}
       - PASSWORD: ${PASSWORD}
