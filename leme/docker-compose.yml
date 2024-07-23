@@ -89,10 +89,11 @@ services:
     env_file:
     - /srv/docker/bridgehead/StandortPreprozessing/.env
     environment:
-      - DIRECTORY_TO_WATCH=/data
-      - POST_URL=https://81.89.199.152/send/receiver.UniMannheim
-      - USERNAME=leme
-      - PASSWORD=ab89cb45b2a44142a474653db22d32d0
+      - DIRECTORY_TO_WATCH: /data
+      - POST_URL: ${POST_URL}
+      - USERNAME: ${USERNAME}
+      - PASSWORD: ${PASSWORD}
+
 
 
 # volumes:
