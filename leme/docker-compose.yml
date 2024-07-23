@@ -73,7 +73,6 @@ services:
       - "traefik.http.routers.file-sender.tls=true"
       - "traefik.http.routers.file-sender.middlewares=auth"
 
-
   file-receiver:
     image: samply/beam-file:task-based-files-server
     command: ["receive", "save", "-o", "/data", "-p", "%f_%t_%n"]         # statt "send" auch "callback" zum weitersenden zu bsp. FASTAPI order Experss Server
@@ -83,6 +82,18 @@ services:
       BEAM_ID: receiver.${PROXY_ID}
     volumes:
       - /home/ubuntu/data:/data
+
+  file-watcher:
+    image: ../StandortPreprozessing/
+    volumes:
+      - /home/ubuntu/data:/data
+    environment:
+      - DIRECTORY_TO_WATCH=/data
+      - POST_URL=${POST_URL}
+      - USERNAME=${USERNAME}
+      - PASSWORD=${PASSWORD}
+
+
 
 # volumes:
 #   blaze-data:

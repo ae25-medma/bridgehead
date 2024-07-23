@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  file-watcher:
+    build: .
+    volumes:
+      - /path/to/your/directory:/path/to/your/directory
+    environment:
+      - DIRECTORY_TO_WATCH=/path/to/your/directory
+      - POST_URL=${POST_URL}
+      - USERNAME=${USERNAME}
+      - PASSWORD=${PASSWORD}
