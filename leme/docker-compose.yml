@@ -64,7 +64,6 @@ services:
       BEAM_ID: sender.${PROXY_ID}
       BIND_ADDR: 0.0.0.0:8080
       #API_KEY: testbridgehead_api_key
-      
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.file-sender.rule=PathPrefix(`/send`)"              # Füge Pfad ein schauen wie ID
@@ -87,6 +86,8 @@ services:
     image: ../StandortPreprozessing/
     volumes:
       - /home/ubuntu/data:/data
+    env_file:
+    - /path/to/your/env/file/.env
     environment:
       - DIRECTORY_TO_WATCH=/data
       - POST_URL=${POST_URL}
