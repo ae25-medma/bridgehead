@@ -83,7 +83,7 @@ services:
       - /home/ubuntu/data:/data
 
   file-watcher:
-    image: ../StandortPreprozessing/
+    image: ./StandortPreprozessing/
     volumes:
       - /home/ubuntu/data:/data
     environment:

@@ -11,8 +11,8 @@ load_dotenv()
 
 DIRECTORY_TO_WATCH = os.getenv('DIRECTORY_TO_WATCH')
 POST_URL = os.getenv('POST_URL')
-USERNAME = os.getenv('USERNAME')
-PASSWORD = os.getenv('PASSWORD')
+USERNAME_UNI = os.getenv('USERNAME_UNI')
+PASSWORD_UNI = os.getenv('PASSWORD_UNI')
 
 class NewFileHandler(FileSystemEventHandler):
     def on_created(self, event):
@@ -24,15 +24,21 @@ class NewFileHandler(FileSystemEventHandler):
     def upload_file(self, file_path, filename):
         with open(file_path, 'rb') as file:
             files = {'file': (filename, file)}
-            response = requests.post(
-                POST_URL,
-                files=files,
-                auth=HTTPBasicAuth(USERNAME, PASSWORD)
-            )
-            if response.status_code == 200:
-                print(f"File {filename} uploaded successfully.")
-            else:
-                print(f"Failed to upload {filename}. Status code: {response.status_code}")
+            headers = {'Filename': filename}
+            try:
+                response = requests.post(
+                    POST_URL,
+                    files=files,
+                    headers=headers,
+                    auth=HTTPBasicAuth(USERNAME_UNI, PASSWORD_UNI),
+                    verify=False  # Disable SSL verification
+                )
+                if response.status_code == 200:
+                    print(f"File {filename} uploaded successfully.")
+                else:
+                    print(f"Failed to upload {filename}. Status code: {response.status_code}  \nIp: {POST_URL}\nUsername: {USERNAME_UNI}\nPassword:{PASSWORD_UNI}")
+            except requests.exceptions.RequestException as e:
+                print(f"An error occurred: {e}")
 
 if __name__ == "__main__":
     event_handler = NewFileHandler()
