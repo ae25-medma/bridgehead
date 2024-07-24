@@ -91,9 +91,7 @@ services:
       - /home/ubuntu/data:/data
     environment:
       DIRECTORY_TO_WATCH: /data
-      POST_URL: https://81.89.199.152/send/receiver.UniMannheim
-      USERNAME: leme
-      PASSWORD: ab89cb45b2a44142a474653db22d32d0
+      POST_URL: http://file-sender:8080/send/receiver.UniMannheim # receiver.UniMannheim -> Umbegungsvariable
 
 
 
