@@ -39,6 +39,7 @@ class NewFileHandler(FileSystemEventHandler):
                 print(f"An error occurred: {e}")
 
 if __name__ == "__main__":
+    print("File-watcher started")
     event_handler = NewFileHandler()
     observer = Observer()
     observer.schedule(event_handler, DIRECTORY_TO_WATCH, recursive=False)
