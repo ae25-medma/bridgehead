@@ -83,7 +83,10 @@ services:
       - /home/ubuntu/data:/data
 
   file-watcher:
-    image: ./StandortPreprozessing/
+    image: file-watcher
+    build:
+      context: /srv/docker/bridgehead/standort_preprocessing
+      dockerfile: Dockerfile
     volumes:
       - /home/ubuntu/data:/data
     environment:
