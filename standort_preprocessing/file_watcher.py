@@ -31,7 +31,7 @@ class NewFileHandler(FileSystemEventHandler):
                     files=files,
                     headers=headers,
                     auth=HTTPBasicAuth(USERNAME_UNI, PASSWORD_UNI),
-                    verify=False  # Disable SSL verification
+                    verify=True  # Disable SSL verification
                 )
                 if response.status_code == 200:
                     print(f"File {filename} uploaded successfully.")
