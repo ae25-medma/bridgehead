@@ -17,7 +17,8 @@ class NewFileHandler(FileSystemEventHandler):
         if not event.is_directory:
             file_path = event.src_path
             filename = os.path.basename(file_path)
-            self.upload_file(file_path, filename)
+            if not filename.endswith('.swp'):
+                self.upload_file(file_path, filename)
 
     def upload_file(self, file_path, filename):
         with open(file_path, 'rb') as file:
