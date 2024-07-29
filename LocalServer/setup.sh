@@ -31,7 +31,7 @@ http {
   }
 
   server {
-    listen 443 ssl;
+    listen 8443 ssl;  # Change port to 8443
     server_name localhost;
 
     ssl_certificate /etc/nginx/certs/selfsigned.crt;
