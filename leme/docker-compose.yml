@@ -1,39 +1,5 @@
 
 services:
-  # blaze:
-  #   image: docker.verbis.dkfz.de/cache/samply/blaze:latest
-  #   container_name: bridgehead-leme-blaze
-  #   environment:
-  #     BASE_URL: "http://bridgehead-leme-blaze:8080"
-  #     JAVA_TOOL_OPTIONS: "-Xmx${BLAZE_MEMORY_CAP:-4096}m"
-  #     DB_RESOURCE_CACHE_SIZE: ${BLAZE_RESOURCE_CACHE_CAP:-2500000}
-  #     DB_BLOCK_CACHE_SIZE: $BLAZE_MEMORY_CAP
-  #     ENFORCE_REFERENTIAL_INTEGRITY: "false"
-  #   volumes:
-  #     - "blaze-data:/app/data"
-  #   labels:
-  #     - "traefik.enable=true"
-  #     - "traefik.http.routers.blaze_leme.rule=PathPrefix(`/leme-localdatamanagement`)"
-  #     - "traefik.http.middlewares.leme_b_strip.stripprefix.prefixes=/leme-localdatamanagement"
-  #     - "traefik.http.services.blaze_leme.loadbalancer.server.port=8080"
-  #     - "traefik.http.routers.blaze_leme.middlewares=leme_b_strip,auth"
-  #     - "traefik.http.routers.blaze_leme.tls=true"
-
-  # focus:
-  #   image: docker.verbis.dkfz.de/cache/samply/focus:0.4.4
-  #   container_name: bridgehead-focus
-  #   environment:
-  #     API_KEY: ${FOCUS_BEAM_SECRET_SHORT}
-  #     BEAM_APP_ID_LONG: focus.${PROXY_ID}
-  #     PROXY_ID: ${PROXY_ID}
-  #     BLAZE_URL: "http://bridgehead-leme-blaze:8080/fhir/"
-  #     BEAM_PROXY_URL: http://beam-proxy:8081
-  #     RETRY_COUNT: ${FOCUS_RETRY_COUNT}
-  #     EPSILON: 0.28
-  #   depends_on:
-  #     - "beam-proxy"
-  #     - "blaze"
-
   beam-proxy:
     image: samply/beam-proxy:develop
     container_name: bridgehead-beam-proxy
@@ -101,3 +67,43 @@ services:
 secrets:
   proxy.pem:
     file: /etc/bridgehead/pki/${SITE_ID}.priv.pem
+
+
+
+
+
+
+    
+  # blaze:
+  #   image: docker.verbis.dkfz.de/cache/samply/blaze:latest
+  #   container_name: bridgehead-leme-blaze
+  #   environment:
+  #     BASE_URL: "http://bridgehead-leme-blaze:8080"
+  #     JAVA_TOOL_OPTIONS: "-Xmx${BLAZE_MEMORY_CAP:-4096}m"
+  #     DB_RESOURCE_CACHE_SIZE: ${BLAZE_RESOURCE_CACHE_CAP:-2500000}
+  #     DB_BLOCK_CACHE_SIZE: $BLAZE_MEMORY_CAP
+  #     ENFORCE_REFERENTIAL_INTEGRITY: "false"
+  #   volumes:
+  #     - "blaze-data:/app/data"
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.http.routers.blaze_leme.rule=PathPrefix(`/leme-localdatamanagement`)"
+  #     - "traefik.http.middlewares.leme_b_strip.stripprefix.prefixes=/leme-localdatamanagement"
+  #     - "traefik.http.services.blaze_leme.loadbalancer.server.port=8080"
+  #     - "traefik.http.routers.blaze_leme.middlewares=leme_b_strip,auth"
+  #     - "traefik.http.routers.blaze_leme.tls=true"
+
+  # focus:
+  #   image: docker.verbis.dkfz.de/cache/samply/focus:0.4.4
+  #   container_name: bridgehead-focus
+  #   environment:
+  #     API_KEY: ${FOCUS_BEAM_SECRET_SHORT}
+  #     BEAM_APP_ID_LONG: focus.${PROXY_ID}
+  #     PROXY_ID: ${PROXY_ID}
+  #     BLAZE_URL: "http://bridgehead-leme-blaze:8080/fhir/"
+  #     BEAM_PROXY_URL: http://beam-proxy:8081
+  #     RETRY_COUNT: ${FOCUS_RETRY_COUNT}
+  #     EPSILON: 0.28
+  #   depends_on:
+  #     - "beam-proxy"
+  #     - "blaze"
