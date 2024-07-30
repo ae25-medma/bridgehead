@@ -49,18 +49,17 @@ def upload_file():
 
 @app.route('/getnewestfile', methods=['GET'])
 def get_newest_file():
-    """
-    Get the newest file containing a specific filename part from the /home/ubuntu/data directory.
+    # Get the newest file containing a specific filename part from the /home/ubuntu/data directory.
     
-    Request: 
-    - GET request
-    - Query parameter: filename (part of the filename to search for)
+    # Request: 
+    # - GET request
+    # - Query parameter: filename (part of the filename to search for)
     
-    Response:
-    - Success: Sends the newest file and its content as a file download.
-    - Failure: {"error": "No filename provided"}, 400
-               {"error": "No matching files found"}, 404
-    """
+    # Response:
+    # - Success: File with content
+    # - Failure: {"error": "No filename provided"}, 400
+    #            {"error": "No matching files found"}, 404
+    
     filename_part = request.args.get('filename')
     if not filename_part:
         return jsonify({"error": "No filename provided"}), 400
@@ -69,10 +68,12 @@ def get_newest_file():
     if not matching_files:
         return jsonify({"error": "No matching files found"}), 404
     
-    matching_files.sort(key=lambda f: f.split('_')[2], reverse=True)
+    # Sort the matching files based on the timestamp part of the filename
+    matching_files.sort(key=lambda f: int(f.split('_')[2]), reverse=True)
     newest_file = matching_files[0]
+    file_path = os.path.join(UPLOAD_FOLDER, newest_file)
     
-    return send_file(os.path.join(UPLOAD_FOLDER, newest_file), as_attachment=True, attachment_filename=newest_file)
+    return send_file(file_path, as_attachment=True)
 
 @app.route('/getdatafromlocation', methods=['GET'])
 def get_data_from_location():
