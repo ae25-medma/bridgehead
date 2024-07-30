@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Directory where the docker-compose.yml is located
-DOCKER_COMPOSE_DIR="/home/ubuntu/LocalServer"
+DOCKER_COMPOSE_DIR="/home/ubuntu/InternalServer"
 
 # Change to the docker-compose directory
 cd "$DOCKER_COMPOSE_DIR" || { echo "Directory $DOCKER_COMPOSE_DIR not found."; exit 1; }
@@ -12,7 +12,7 @@ mkdir -p certs
 # Generate a self-signed SSL certificate
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
   -keyout certs/selfsigned.key -out certs/selfsigned.crt \
-  -subj "/C=DE/ST=Germany/L=LocalServer/O=LocalServer/OU=IT/CN=localhost"
+  -subj "/C=DE/ST=Germany/L=InternalServer/O=InternalServer/OU=IT/CN=localhost"
 
 # Create the nginx.conf file
 cat > nginx.conf <<EOF
