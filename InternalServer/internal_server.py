@@ -68,8 +68,17 @@ def get_newest_file():
     if not matching_files:
         return jsonify({"error": "No matching files found"}), 404
     
-    # Sort the matching files based on the timestamp part of the filename
-    matching_files.sort(key=lambda f: int(f.split('_')[2]), reverse=True)
+    def extract_timestamp(filename):
+        try:
+            return int(filename.split('_')[2])
+        except (IndexError, ValueError):
+            return None
+    
+    matching_files = [f for f in matching_files if extract_timestamp(f) is not None]
+    if not matching_files:
+        return jsonify({"error": "No matching files found"}), 404
+
+    matching_files.sort(key=lambda f: extract_timestamp(f), reverse=True)
     newest_file = matching_files[0]
     file_path = os.path.join(UPLOAD_FOLDER, newest_file)
     
