@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  flask_server:
+    build: .
+    ports:
+      - "5462:5462"
+    volumes:
+      - /home/ubuntu/data:/data
+      - /home/ubuntu/locations:/locations
+    restart: always
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8080:80"     # Optionally expose port 80 for HTTP (redirect to HTTPS)
+      - "8443:443"    # Change from 443 to 8443 to avoid conflict
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./certs:/etc/nginx/certs
+    depends_on:
+      - flask_server
+    restart: always
