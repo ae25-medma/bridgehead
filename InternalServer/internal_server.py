@@ -1,6 +1,7 @@
 import os
-from flask import Flask, request, send_from_directory, jsonify
+from flask import Flask, request, jsonify, send_file
 from werkzeug.utils import secure_filename
+
 
 app = Flask(__name__)
 
@@ -56,7 +57,7 @@ def get_newest_file():
     - Query parameter: filename (part of the filename to search for)
     
     Response:
-    - Success: Returns the file content directly.
+    - Success: Sends the newest file and its content as a file download.
     - Failure: {"error": "No filename provided"}, 400
                {"error": "No matching files found"}, 404
     """
@@ -71,7 +72,7 @@ def get_newest_file():
     matching_files.sort(key=lambda f: f.split('_')[2], reverse=True)
     newest_file = matching_files[0]
     
-    return send_from_directory(UPLOAD_FOLDER, newest_file)
+    return send_file(os.path.join(UPLOAD_FOLDER, newest_file), as_attachment=True, attachment_filename=newest_file)
 
 @app.route('/getdatafromlocation', methods=['GET'])
 def get_data_from_location():
