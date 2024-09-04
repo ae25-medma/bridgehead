@@ -49,8 +49,9 @@ services:
     volumes:
       - /home/ubuntu/data:/data
 
+
   file-watcher:
-    image: file-watcher
+    image: file-watcher 
     build:
       context: /srv/docker/bridgehead/standort_preprocessing
       dockerfile: Dockerfile

@@ -1,0 +1,10 @@
+{
+    "ttpid": "<ttpid>",
+    "source_location": "source_location",
+    "last_updated":"current time in formate YYYY-MM-DD hh:mm:ss",
+    "document_list":{
+        "_name":"<filename>.<filetype>",
+        "_uri":"/upload/<filename>.<filetype>",
+        "_timestamp":"<_timestamp> that looks like 1723194874 in formate YYYY-MM-DD hh:mm:ss"
+    }
+}

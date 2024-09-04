@@ -22,3 +22,4 @@ curl --request POST \
 ```
 
 In this command, the `Authorization: Basic` header contains the base64-encoded username and password for accessing the location service. After executing the POST request, the file will be uploaded to the UNIHD Server via the Bridgehead.
+
